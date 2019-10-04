@@ -1,0 +1,30 @@
+### create a single-node cluster with juypternotebook
+gcloud beta dataproc clusters create example-cluster \
+    --optional-components=ANACONDA,JUPYTER \
+    --image-version=1.3 \
+    --enable-component-gateway \
+    --bucket big_data_hw \
+    --project test-project-251000 \
+    --single-node \
+    --metadata \
+    'PIP_PACKAGES=graphframes==0.6' \
+    --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
+    --region us-central1
+
+### upload data
+gsutil cp ./Desktop/Myfile/EECS6893/HW1/q1/data.txt \
+    gs://big_data_hw/hw1/data.txt
+
+gsutil cp ./Desktop/Myfile/EECS6893/HW1/q1/c1.txt \
+    gs://big_data_hw/hw1/c1.txt
+
+gsutil cp ./Desktop/Myfile/EECS6893/HW1/q1/c2.txt \
+    gs://big_data_hw/hw1/c2.txt
+
+gsutil cp ./Desktop/Myfile/EECS6893/HW1/adult.data.csv \
+    gs://big_data_hw/hw1/adult.data.csv
+
+# download the answer jupyter
+gsutil cp gs://big_data_hw/notebooks/jupyter/E6893_HW1.ipynb \
+    ./Desktop/Myfile/EECS6893/HW1/E6893_HW1.ipynb   
+
